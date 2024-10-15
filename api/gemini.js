@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         const model = gemini.getGenerativeModel({ model: 'gemini-pro' });
 
         // Start a conversation with the Gemini API
-    const conversation = await model.startChat({
+    const conversation = model.startChat({
         history: [
             { role: 'user', parts: [`You will be given some questions based on the following context: ${context}`] },
             { role: 'user', parts: ["Respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}. Your responses will be separated by a script using this format, so don't deviate from it. Each answer will be shown to the user directly, so any formatting (such as newlines) will be extremely confusing."] },
