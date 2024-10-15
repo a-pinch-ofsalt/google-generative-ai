@@ -29,8 +29,7 @@ export default async function handler(req, res) {
           { role: 'user', parts: [`Content: ${context}`] },
           { role: 'user', parts: ["Respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}."] }
         ],
-        generationConfig: { maxOutputTokens: 300 },
-      });
+          });
 
       console.log("Conversation started");
 
