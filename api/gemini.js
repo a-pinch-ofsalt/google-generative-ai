@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
       console.log("Initialized GoogleGenerativeAI");
 
-      const model = gemini.getGenerativeModel({ model: 'gemini-pro' });
+      const model = gemini.getGenerativeModel({ model: 'gemini-1.5-flash' });
       console.log("Generative model fetched successfully");
 
       // Start a conversation with the Gemini API
