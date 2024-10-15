@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       console.log("Conversation result:", response);
 
       // Safely access the response text
-      res.status(200).json({ answer: response?.text });
+      res.status(200).json({ answer: response?.text() });
     } catch (error) {
       console.error("Error caught in try block:", error.message);
       res.status(500).json({ error: `Failed to process the request: ${error.message}` });
