@@ -17,13 +17,12 @@ export default async function handler(req, res) {
         history: [
             { role: 'user', parts: [`You will be given some questions based on the following context: ${context}`] },
             { role: 'user', parts: ["Respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}. Your responses will be separated by a script using this format, so don't deviate from it. Each answer will be shown to the user directly, so any formatting (such as newlines) will be extremely confusing."] },
-            { role: 'user', parts: [questions] }
           ],
           generationConfig: { maxOutputTokens: 300 },
     });
 
         // Get the result and return the answer
-        const result = await conversation.sendMessage(question);
+        const result = await conversation.sendMessage(questions);
         const responseText = result?.response?.text() || "No response text";
 
         res.status(200).json({ answer: responseText });
