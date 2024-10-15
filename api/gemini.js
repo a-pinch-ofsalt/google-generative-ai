@@ -23,24 +23,12 @@ export default async function handler(req, res) {
       const model = gemini.getGenerativeModel({ model: 'gemini-1.5-flash' });
       console.log("Generative model fetched successfully");
 
-      // Start a conversation with the Gemini API
-      const conversation = await model.startChat({
-        history: [
-          { role: 'user', parts: [`Content: ${context}`] },
-          { role: 'user', parts: ["Respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}."] }
-        ],
-          });
-
-      console.log("Conversation started");
-
+      const response = await model.generateContent(`Given the following content, respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}. Do not deviate from the format, since your responses will be parsed by a script. Please do not put any formatting in your indiviual responses (i.e. newlines), as they will be shown directly to the user. Context: ${context}`);
       // Send the questions and log the result
-      const result = await conversation.sendMessage(questions);
-      console.log("Conversation result:", result);
+      console.log("Conversation result:", response);
 
       // Safely access the response text
-      const responseText = result?.response?.text ? result.response.text() : "No response text available";
-
-      res.status(200).json({ answer: responseText });
+      res.status(200).json({ answer: response });
     } catch (error) {
       console.error("Error caught in try block:", error.message);
       res.status(500).json({ error: `Failed to process the request: ${error.message}` });
