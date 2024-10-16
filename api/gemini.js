@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       const model = gemini.getGenerativeModel({ model: 'gemini-1.5-flash' });
       console.log("Generative model fetched successfully");
 
-      const result = await model.generateContent(`Given the following context, respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}. Do not deviate from the format, since your responses will be parsed by a script. Please do not put any formatting in your indiviual responses (i.e. newlines or backslashes), as they will be shown directly to the user. Context: ${context}\n\n\nQuestions: ${questions}`);
+      const result = await model.generateContent(`Given the following context, respond to the questions as accurately as you can. Type your responses in the following format: ALOHA{answer 1> answer 2> etc}. Do not deviate from the format, since your responses will be parsed by a script. Please do not put any formatting in your indiviual responses (i.e. newlines or backslashes), as they will be shown directly to the user. And PLEASE, if you don't know an answer, just put Unknown for the respective response. Context: ${context}\n\n\nQuestions: ${questions}`);
       // Send the questions and log the result
       console.log("Conversation result:", result.response.text());
 
